@@ -1,4 +1,4 @@
-A=[] # extend list to include non leading 1s
+A=[] # extend list to include non leading 1s mod 
 for i in range(0,2):
   for j in range(0,2):
     for k in range(0,2):
