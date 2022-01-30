@@ -59,29 +59,23 @@ def generator_group (g1,g2,h1,h2):
 
 def trace(i,j,k,l,g1g2,h1h2):
   trace=[]
-  """
   for i in range(0,2):
     for j in range(0,2):
       for k in range(0,2):
         for l in range(0,2):
-  """
-  P= [i*g1g2[0],i*g1g2[1],j*g1g2[2],j*g1g2[3],k*h1h2[0],k*h1h2[1],l*h1h2[2],l*h1h2[3]]
-  if P[0] == P[4] and P[1] == P[5] and P[2] == P[6] and P[3] == P[7] and g1g2[3]==h1h2[3]:
-    trace.append(4)
-  elif P[0] == P[4] and P[1] == P[5] and P[2] == P[6] and P[3] == P[7] and g1g2[3] != h1h2[3]:
-    trace.append(-4)
-  else: 
-    trace.append(0)
-  #return(trace)
-  #print(trace)
-  trace_sum= sum(trace)
-  #print(trace_sum)   
-  #return(trace_sum)
-
-
-
-
-
+  
+          P= [i*g1g2[0],i*g1g2[1],j*g1g2[2],j*g1g2[3],k*h1h2[0],k*h1h2[1],l*h1h2[2],l*h1h2[3]]
+          if P[0] == P[4] and P[1] == P[5] and P[2] == P[6] and P[3] == P[7] and g1g2[3]==h1h2[3]:
+            trace.append(4)
+          elif P[0] == P[4] and P[1] == P[5] and P[2] == P[6] and P[3] == P[7] and g1g2[3] != h1h2[3]:
+            trace.append(-4)
+          else: 
+            trace.append(0)
+          #return(trace)
+          #print(trace)
+          trace_sum= sum(trace)
+          #print(trace_sum)   
+          #return(trace_sum)
 
 #print(len(A))
 g1=[]
@@ -96,5 +90,6 @@ for r in range(0,243):
        g2==(A[s])
        h1==(A[t])
        h2==(A[v])
+       generator_group(g1,g2,h1,h2)
 
 
