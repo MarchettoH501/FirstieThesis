@@ -30,13 +30,14 @@ for i in range(0,2):
 
                         
 
-                        
+'''                       
 print(A)
 print(len(A))
 g1 = [1,0,0,0,0]
 g2 = [0,1,0,1,0]
 h1 = [1,0,0,0,0]
 h2 = [0,1,0,1,0]
+'''
 def sign(a,b,c,d,e,f,g,h):
   if c*e+ d*f == a*g +b*h:
     return (0)
@@ -75,21 +76,24 @@ def trace(i,j,k,l,g1g2,h1h2):
           #print(trace)
           trace_sum= sum(trace)
           #print(trace_sum)   
-          #return(trace_sum)
+          return(trace_sum)
 
 #print(len(A))
 g1=[]
 g2=[]
 h1=[]
 h2=[]
-for r in range(0,243):
-  for s  in range(0,243):
-    for t in range(0,243):
-      for v in range(0,243):
-       g1==(A[r])
-       g2==(A[s])
-       h1==(A[t])
-       h2==(A[v])
-       generator_group(g1,g2,h1,h2)
+def search (a,b,c,d):
+  theList=[]
+  for r in range(0,243):
+    for s  in range(0,243):
+      for t in range(0,243):
+        for v in range(0,243):
+          g1==(A[r])
+          g2==(A[s])
+          h1==(A[t])
+          h2==(A[v])
+          theList.append(trace(a,b,c,d,generator_group(g1,g2,h1,h2)))
+  return(max(theList))
 
 
