@@ -84,13 +84,11 @@ def search (a,b,c,d):
   theList=[]
   for r in range(0,51):
     for s  in range(0,51):
-      for t in range(0,51):
-        for v in range(0,51):
-          g1==(A[r][0])
-          g2==(A[r][1])
-          h1==(A[s][0])
-          h2==(A[s][1])
-          theList.append(trace(a,b,c,d,generator_group(g1,g2,h1,h2)))
+      g1=(A[r][0])
+      g2=(A[r][1])
+      h1=(A[s][0])
+      h2=(A[s][1])
+      theList.append(trace(a,b,c,d,generator_group(g1,g2,h1,h2)[0],generator_group(g1,g2,h1,h2)[1]))
     return(max(theList))
 print(search(1,1,1,1))
 
