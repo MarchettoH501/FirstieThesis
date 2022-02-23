@@ -105,12 +105,13 @@ def play(g1,g2,h1,h2):
               check[y][1].append(b2)
               a= answers(check[x][0],check[x][1],check[y][0],check[y][1])[0]
               b=answers(check[x][0],check[x][1],check[y][0],check[y][1])[1]
-              w =w+(trace(check[x][0],check[x][1],check[y][0],check[y][1])*(Vchsh(a,b,x,y)/(4*16)))
+              'w =w+(trace(check[x][0],check[x][1],check[y][0],check[y][1])*(Vchsh(a,b,x,y)/(4*4*4*4*4)))'
+              w =w+(trace(check[x][0],check[x][1],check[y][0],check[y][1])*1)
               'win =+ sum(w)/len(w)'
               'streak.append(win)'
               check[x][0].remove(check[x][0][4])
               check[x][1].remove(check[x][1][4])
               check[y][0].remove(check[y][0][4])
               check[y][1].remove(check[y][1][4])
-      print(w) 
+  print(w) 
 play(g1,g2,h1,h2)
