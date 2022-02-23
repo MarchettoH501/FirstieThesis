@@ -89,23 +89,28 @@ g1=[1, 0, 0, 0]
 g2=[0, 1, 0, 0]
 h1=[1,0,0,0]
 h2=[0,0,0,1]
-def play(g1,g2,h1,h2,x,y):
-  w=[]
+def play(g1,g2,h1,h2):
+  check=[[g1,g2],[h1,h2]]
+  w=0
   streak=[]
-  for a1 in range(0,2):
-    for a2 in range(0,2):
-      for b1 in range(0,2):
-        for b2 in range(0,2):
-          g1.append(a1)
-          g2.append(a2)
-          h1.append(b1)
-          h2.append(b2)
-          w.append(trace(g1,g2,h1,h2)*(Vchsh(answers(g1,g2,h1,h2)[0],answers(g1,g2,h1,h2)[1],x,y))/(16))
-          win= sum(w)/len(w)
-          streak.append(win)
-          g1.remove(g1[4])
-          g2.remove(g2[4])
-          h1.remove(h1[4])
-          h2.remove(h2[4])
-  print(streak) 
-play(g1,g2,h1,h2,1,1)
+  for x in range(0,2):
+    for y in range (0,2):
+      for a1 in range(0,2):
+        for a2 in range(0,2):
+          for b1 in range(0,2):
+            for b2 in range(0,2):
+              check[x][0].append(a1)
+              check[x][1].append(a2)
+              check[y][0].append(b1)
+              check[y][1].append(b2)
+              a= answers(check[x][0],check[x][1],check[y][0],check[y][1])[0]
+              b=answers(check[x][0],check[x][1],check[y][0],check[y][1])[1]
+              w =w+(trace(check[x][0],check[x][1],check[y][0],check[y][1])*(Vchsh(a,b,x,y)/(4*16)))
+              'win =+ sum(w)/len(w)'
+              'streak.append(win)'
+              check[x][0].remove(check[x][0][4])
+              check[x][1].remove(check[x][1][4])
+              check[y][0].remove(check[y][0][4])
+              check[y][1].remove(check[y][1][4])
+      print(w) 
+play(g1,g2,h1,h2)
