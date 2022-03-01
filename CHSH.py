@@ -99,19 +99,23 @@ def play(g1,g2,h1,h2):
         for a2 in range(0,2):
           for b1 in range(0,2):
             for b2 in range(0,2):
-              check[x][0].append(a1)
-              check[x][1].append(a2)
-              check[y][0].append(b1)
-              check[y][1].append(b2)
-              a= answers(check[x][0],check[x][1],check[y][0],check[y][1])[0]
-              b=answers(check[x][0],check[x][1],check[y][0],check[y][1])[1]
-              'w =w+(trace(check[x][0],check[x][1],check[y][0],check[y][1])*(Vchsh(a,b,x,y)/(4*4*4*4*4)))'
-              w =w+(trace(check[x][0],check[x][1],check[y][0],check[y][1])*1)
+              checkA1=check[x][0].copy()
+              checkA2=check[x][1].copy()
+              checkB1=check[y][0].copy()
+              checkB2=check[y][1].copy()
+              checkA1.append(a1)
+              checkA2.append(a2)
+              checkB1.append(b1)
+              checkB2.append(b2)
+              a= answers(checkA1,checkA2,checkB1,checkB2)[0]
+              b=answers(checkA1,checkA2,checkB1,checkB2)[1]
+              'w =w+(trace(checkA[x][0],checkA[x][1],checkB[y][0],checkB[y][1])*(Vchsh(a,b,x,y)/(4*4*4*4*4)))'
+              w =w+(trace(checkA1,checkA2,checkB1,checkB2)*1)
               'win =+ sum(w)/len(w)'
               'streak.append(win)'
-              check[x][0].remove(check[x][0][4])
-              check[x][1].remove(check[x][1][4])
-              check[y][0].remove(check[y][0][4])
-              check[y][1].remove(check[y][1][4])
+              checkA1.remove(checkA1[4])
+              checkA2.remove(checkA2[4])
+              checkB1.remove(checkB1[4])
+              checkB2.remove(checkB2[4])
   print(w) 
 play(g1,g2,h1,h2)
