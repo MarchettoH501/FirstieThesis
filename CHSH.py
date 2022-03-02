@@ -8,16 +8,13 @@ for i in range(0,2):
            for o in range(0,2):
              for p in range(0,2):
               if i+j+k+l>=1 and n+o+p>=1:
-                    if k==1 and i==0 and j==0 and  k!=n and k!=o:
-                      if p==1 and p!=l:
-                        A.append([[i,j,k,l],[0,n,o,p]])
-                    elif l==1 and l!=n and l!=o and l!=p and l==j==k==0:
-                      A.append([[i,j,k,l],[0,n,o,p]])
-                    elif j==1 and n!=j:
-                      if o==1 and k!=0: 
-                        A.append([[i,j,k,l],[0,n,o,p]])
-                      elif p==1 and o ==0 and l==0:
-                        A.append([[i,j,k,l],[0,n,o,p]])
+                if (i*o+j*p)%2==(l*n)%2:
+                  if k==1 and n+o+p>0:
+                   A.append([[i,j,k,l],[0,n,o,p]])
+                  elif i==n==0 and j==1 and o+p>0:
+                    A.append([[i,j,k,l],[0,n,o,p]])
+                  elif i==j==n==o==0 and k==p==1:
+                    A.append([[i,j,k,l],[0,n,o,p]])
 def trace(g1,g2,h1,h2):
     trace=[]
     for i in range(0,2):
@@ -43,20 +40,17 @@ def trace(g1,g2,h1,h2):
     #print(trace_sum)   
     return(trace_sum)
 #print(len(A))
-g1=[]
-g2=[]
-h1=[]
-h2=[]
+'g1=[]'
+'g2=[]'
+'h1=[]'
+'h2=[]'
 def search ():
   theList=[]
   for r in range(0,len(A)):
-    for s  in range(0,len(A)):
-      g1=(A[r][0])
-      g2=(A[r][1])
-      h1=(A[s][0])
-      h2=(A[s][1])
-      theList.append(trace(g1,g2,h1,h2))
-    return(theList)
+   G1=(A[r][0])
+   G2=(A[r][1])
+   theList.append((G1,G2))
+  return(theList)
 "theList=[]"
 "print(search())"
 
@@ -85,12 +79,16 @@ def answers(g1,g2,h1,h2):
     b=1
   return(a,b)
   
-g1=[1, 0, 0, 0]
-g2=[0, 1, 0, 0]
-h1=[1,0,0,0]
-h2=[0,0,0,1]
-def play(g1,g2,h1,h2):
-  check=[[g1,g2],[h1,h2]]
+"g1=[1, 0, 0, 0]"
+"g2=[0, 1, 0, 1]"
+"h1=[1,0,0,0]"
+"h2=[0,1,0,1]"
+"g3=[1, 0, 0, 0]"
+"g4=[0, 1, 0, 1]"
+"h3=[1,0,0,0]"
+"h4=[0,1,0,1]"
+def play(g1,g2,g3,g4,h1,h2,h3,h4):
+  check=[[g1,g2],[g3,g4],[h1,h2],[h3,h4]]
   w=0
   streak=[]
   for x in range(0,2):
@@ -101,21 +99,42 @@ def play(g1,g2,h1,h2):
             for b2 in range(0,2):
               checkA1=check[x][0].copy()
               checkA2=check[x][1].copy()
-              checkB1=check[y][0].copy()
-              checkB2=check[y][1].copy()
+              checkB1=check[y+2][0].copy()
+              checkB2=check[y+2][1].copy()
               checkA1.append(a1)
               checkA2.append(a2)
               checkB1.append(b1)
               checkB2.append(b2)
               a= answers(checkA1,checkA2,checkB1,checkB2)[0]
               b=answers(checkA1,checkA2,checkB1,checkB2)[1]
-              'w =w+(trace(checkA[x][0],checkA[x][1],checkB[y][0],checkB[y][1])*(Vchsh(a,b,x,y)/(4*4*4*4*4)))'
-              w =w+(trace(checkA1,checkA2,checkB1,checkB2)*1)
+              w =w+(trace(checkA1,checkA2,checkB1,checkB2)*(Vchsh(a,b,x,y)/(4*4*4*4)))
+              'w =w+(trace(checkA1,checkA2,checkB1,checkB2)*1)'
               'win =+ sum(w)/len(w)'
               'streak.append(win)'
               checkA1.remove(checkA1[4])
               checkA2.remove(checkA2[4])
               checkB1.remove(checkB1[4])
               checkB2.remove(checkB2[4])
-  print(w) 
-play(g1,g2,h1,h2)
+  return(w) 
+
+'play(g1,g2,g3,g4,h1,h2,h3,h4)'
+def findStrategyCHSH(A):
+  R=[]
+  S=search()
+  for i in  range(0,len(S)):
+    for j in  range(0,len(S)):
+      for k in  range(0,len(S)):
+        for l in  range(0,len(S)):
+          g1=S[i][0]
+          g2=S[i][1]
+          g3=S[j][0]
+          g4=S[j][1]
+          h1=S[k][0]
+          h2=S[k][1]
+          h3=S[l][0]
+          h4=S[l][1]
+          R.append(play(g1,g2,g3,g4,h1,h2,h3,h4))
+  print(max(R))
+findStrategyCHSH(A)
+
+  
